@@ -1,5 +1,5 @@
 resource "aws_vpc" "main" {
-  cidr_block = var.vpc_cidr[0]
+  cidr_block = var.vpc_cidr
 
   tags = {
     Name = var.env_code
