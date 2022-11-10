@@ -1,4 +1,4 @@
-variable env_code {
+variable "env_code" {
   type = string
 }
 
