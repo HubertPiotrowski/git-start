@@ -1,7 +1,7 @@
 data "aws_ami" "amazonlinux" {
-  most_recent      = true
+  most_recent = true
 
-filter {
+  filter {
     name   = "name"
     values = ["amzn2-ami-kernel-*"]
   }
@@ -10,26 +10,26 @@ filter {
     values = ["hvm"]
   }
 
-  owners           = [137112412989]
+  owners = [137112412989]
 
 }
 
 #key pair variable
 resource "aws_key_pair" "my_key_pair" {
-    key_name   = "${uuid()}"
-    public_key = "${tls_private_key.t.public_key_openssh}"
+  key_name   = uuid()
+  public_key = tls_private_key.t.public_key_openssh
 }
 provider "tls" {}
 resource "tls_private_key" "t" {
-    algorithm = "RSA"
+  algorithm = "RSA"
 }
 provider "local" {}
 resource "local_file" "key" {
-    content  = "${tls_private_key.t.private_key_pem}"
-    filename = "id_rsa"
-    provisioner "local-exec" {
-        command = "chmod 600 id_rsa"
-    }
+  content  = tls_private_key.t.private_key_pem
+  filename = "id_rsa"
+  provisioner "local-exec" {
+    command = "chmod 600 id_rsa"
+  }
 }
 
 
