@@ -8,5 +8,8 @@ terraform {
 }
 
 provider "aws" {
-  region = "eu-west-1"
+  region = "eu-west-2"
+   allowed_account_ids = [
+    "405263612440",
+  ]
 }
