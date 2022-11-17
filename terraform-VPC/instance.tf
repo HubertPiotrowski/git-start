@@ -1,7 +1,7 @@
 data "aws_ami" "amazonlinux" {
-  most_recent      = true
+  most_recent = true
 
-filter {
+  filter {
     name   = "name"
     values = ["amzn2-ami-kernel-*"]
   }
@@ -10,7 +10,7 @@ filter {
     values = ["hvm"]
   }
 
-  owners           = ["137112412989"]
+  owners = ["137112412989"]
 
 }
 
@@ -41,7 +41,7 @@ resource "aws_security_group" "public" {
     cidr_blocks = ["83.24.126.46/32"]
   }
 
-    ingress {
+  ingress {
     description = "HTTP from public"
     from_port   = 80
     to_port     = 80
