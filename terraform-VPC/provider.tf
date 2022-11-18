@@ -1,8 +1,8 @@
 terraform {
-   backend "s3" {
-    bucket = "tf-state-hubert132487863"
-    key    = "terraform.tfstate"
-    region = "eu-west-2"
+  backend "s3" {
+    bucket         = "tf-state-hubert132487863"
+    key            = "terraform.tfstate"
+    region         = "eu-west-2"
     dynamodb_table = "tf-state"
   }
   required_providers {
