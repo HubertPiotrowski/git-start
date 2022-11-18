@@ -5,8 +5,8 @@ resource "aws_s3_bucket" "tfstate" {
 resource "aws_dynamodb_table" "tfstate" {
   name           = "tf-state"
   billing_mode   = "PROVISIONED"
-    read_capacity  = 1
-    write_capacity = 1
+  read_capacity  = 1
+  write_capacity = 1
   hash_key       = "LockID"
 
   attribute {
