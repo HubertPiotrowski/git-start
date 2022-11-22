@@ -60,12 +60,6 @@ resource "aws_alb_target_group" "main" {
 
 }
 
-resource "aws_lb_target_group_attachment" "main" {
-  target_group_arn = aws_alb_target_group.main.arn
-  target_id        = aws_instance.private.id
-  port             = 80
-}
-
 resource "aws_alb_listener" "main" {
   load_balancer_arn = aws_alb.main.arn
   port              = 80
