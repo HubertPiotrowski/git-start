@@ -19,7 +19,7 @@ resource "aws_launch_configuration" "main" {
   image_id             = data.aws_ami.amazonlinux.id
   instance_type        = "t2.micro"
   security_groups      = [aws_security_group.private.id]
-  user_data            = file("${path.module}/user_data.sh")
+  user_data            = file("${path.module}/user-data.sh")
   iam_instance_profile = aws_iam_instance_profile.main.name
 }
 
@@ -31,7 +31,7 @@ resource "aws_autoscaling_group" "main" {
 
   target_group_arns    = [var.target_group_arn]
   launch_configuration = aws_launch_configuration.main.name
-  vpc_zone_identifier  = data.terraform_remote_state.level1.outputs.privatesub_id
+  vpc_zone_identifier  = var.privatesub_id
 
   tags = [
     {
