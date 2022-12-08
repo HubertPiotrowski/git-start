@@ -25,7 +25,7 @@ resource "aws_security_group" "private" {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    security_groups = [aws_security_group.load_balancer.id]
+    security_groups = [aws_security_group.load_balancer.id] // Reference to undeclared resource
   }
 
   egress {
