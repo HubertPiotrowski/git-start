@@ -1,5 +1,5 @@
 resource "aws_acm_certificate" "main" {
-  domain_name       = "hubertgroup.click"
+  domain_name       = "www.hubertgroup.click"
   validation_method = "DNS"
 
   tags = {

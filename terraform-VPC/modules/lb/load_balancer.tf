@@ -1,10 +1,10 @@
 resource "aws_security_group" "load_balancer" {
   name        = "${var.env_code}-load_balancer"
-  description = "Allow port 80 inbound to ELB"
+  description = "Allow port 443 inbound to ELB"
   vpc_id      = var.vpc_id
 
   ingress {
-    description = "HTTP to ELB"
+    description = "https to ELB"
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
