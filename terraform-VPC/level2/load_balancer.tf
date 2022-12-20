@@ -44,7 +44,7 @@ module "external_sg" {
 
 module "elb" {
   source = "terraform-aws-modules/alb/aws"
-  version = "4.0.0"
+  version = "7.0.0"
   
   name = "${var.env_code}-elb"
 
@@ -90,7 +90,7 @@ module "elb" {
 }
 
 module "dns" {
-  source = "terraform-aws-modules/route53/aws"
+  source = "terraform-aws-modules/route53/aws//modules/records"
   version = "2.10.1"
 
   zone_id = data.aws_route53_zone.main.zone_id
