@@ -91,6 +91,7 @@ module "elb" {
 
 module "dns" {
   source = "terraform-aws-modules/route53/aws"
+  version = "2.10.1"
 
   zone_id = data.aws_route53_zone.main.zone_id
 
