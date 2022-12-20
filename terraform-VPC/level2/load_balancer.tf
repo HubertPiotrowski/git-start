@@ -4,7 +4,7 @@ data "aws_route53_zone" "main" {
 
 module "acm" {
   source = "terraform-aws-modules/acm/aws"
-  version = "3.5.0"
+
 
   domain_name = "www.hubertgroup.click"
   zone_id     = data.aws_route53_zone.main.zone_id
@@ -16,7 +16,6 @@ module "acm" {
 
 module "external_sg" {
   source = "terraform-aws-modules/security-group/aws"
-  version = "4.16.2"
 
   name   = "${var.env_code}-external"
   vpc_id = data.terraform_remote_state.level1.outputs.vpc_id
@@ -44,20 +43,19 @@ module "external_sg" {
 
 module "elb" {
   source = "terraform-aws-modules/alb/aws"
-  version = "7.0.0"
-  
-  name = "${var.env_code}-elb"
+
+  name = "${var.env_code}"
 
   load_balancer_type = "application"
 
   vpc_id          = data.terraform_remote_state.level1.outputs.vpc_id
   internal        = false
-  subnets         = data.terraform_remote_state.level1.outputs.privatesub_id
+  subnets         = data.terraform_remote_state.level1.outputs.publicsub_id
   security_groups = [module.external_sg.security_group_id]
 
   target_groups = [
     {
-      name_prefix          = "${var.env_code}-tg"
+      name_prefix          = "${var.env_code}"
       backend_protocol     = "HTTP"
       backend_port         = 80
       deregistration_delay = 10
@@ -78,20 +76,18 @@ module "elb" {
 
   https_listeners = [
     {
-      port            = 443
-      protocol        = "HTTPS"
-      certificate_arn = module.acm.this_acm_certificate_arn
-      default_action = {
-        type             = "forward"
-        target_group_arn = module.elb.this_lb_target_group_arns[0]
-      }
+      port               = 443
+      protocol           = "HTTPS"
+      certificate_arn    = module.acm.acm_certificate_arn
+      action_type        = "forward"
+      target_group_index = 0
+
     }
   ]
 }
 
 module "dns" {
   source = "terraform-aws-modules/route53/aws//modules/records"
-  version = "2.10.1"
 
   zone_id = data.aws_route53_zone.main.zone_id
 
