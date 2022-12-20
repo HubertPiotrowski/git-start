@@ -4,7 +4,7 @@ data "aws_route53_zone" "main" {
 
 module "acm" {
   source = "terraform-aws-modules/acm/aws"
-  version = "4.3.1"
+  version = "3.5.0"
 
   domain_name = "www.hubertgroup.click"
   zone_id     = data.aws_route53_zone.main.zone_id
@@ -12,6 +12,7 @@ module "acm" {
   wait_for_validation = true
 
 }
+
 
 module "external_sg" {
   source = "terraform-aws-modules/security-group/aws"
@@ -89,7 +90,7 @@ module "elb" {
 }
 
 module "dns" {
-  source = "terraform-aws-modules/route53/aws//modules/records"
+  source = "terraform-aws-modules/route53/aws"
 
   zone_id = data.aws_route53_zone.main.zone_id
 
