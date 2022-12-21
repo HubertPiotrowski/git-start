@@ -1,5 +1,6 @@
 data "aws_secretsmanager_secret" "rds_password" {
   name = "main/rds/password"
+  
 }
 
 data "aws_secretsmanager_secret_version" "rds_password" {

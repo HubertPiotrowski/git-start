@@ -3,13 +3,13 @@ output "vpc_id" {
 }
 
 output "publicsub_id" {
-  value = module.vpc.publicsub_id
+  value = module.vpc.public_subnets
 }
 
 output "privatesub_id" {
-  value = module.vpc.privatesub_id
+  value = module.vpc.private_subnets
 }
 
 output "vpc_cidr" {
-  value = module.vpc.vpc_cidr
+  value = module.vpc.vpc_cidr_block
 }
