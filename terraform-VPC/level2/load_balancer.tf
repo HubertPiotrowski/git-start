@@ -1,5 +1,5 @@
 data "aws_route53_zone" "main" {
-  name = "www.hubertgroup.click"
+  name = "hubertgroup.click"
 }
 
 module "acm" {
